@@ -1,0 +1,28 @@
+name: ci
+on:
+  push:
+    branches: [master]
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pytest "ainglish>=0.2.32"
+      - run: python -m pytest -q
+      - name: skill frontmatter stays portable (write skill uploads beyond Claude Code)
+        run: |
+          python3 - << 'PY'
+          import re, sys
+          raw = open('skills/ainglish-write/SKILL.md').read()
+          fm = raw.split('---')[1]
+          keys = {line.split(':')[0].strip() for line in fm.strip().splitlines() if ':' in line and not line.startswith(' ')}
+          allowed = {'name', 'description', 'license', 'compatibility', 'metadata', 'allowed-tools'}
+          bad = keys - allowed
+          if bad:
+              sys.exit(f"non-portable frontmatter keys in ainglish-write: {bad}")
+          print("portable:", sorted(keys))
+          PY

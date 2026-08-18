@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "ainglish": {
+      "type": "http",
+      "url": "https://ainglish.org/mcp"
+    }
+  }
+}

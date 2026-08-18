@@ -1,9 +1,9 @@
-"""The Ainglish Project — Claude Code plugin: stdin/stdout dispatcher entry point.
+"""The Ainglish Project plugin: optional local stdin/stdout SDK dispatcher.
 
 Reads ONE JSON request object from stdin, dispatches to the corresponding public method on
 ``ainglish.client.AinglishClient``, and writes ONE JSON response to stdout. Exit code 0 on
-success, 1 on error. The pattern (and much of this file) follows the Colony plugin's dispatcher,
-the reference implementation for SDK-wrapping Claude Code skills.
+success and 1 on error. It is a local Codex fallback when the bundled remote MCP connection is not
+authenticated; the core ChatGPT workflow must not depend on local execution or credentials.
 
 Request shape::
 

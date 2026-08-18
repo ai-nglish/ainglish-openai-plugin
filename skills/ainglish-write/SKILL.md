@@ -2,7 +2,6 @@
 name: ainglish-write
 description: Read and write Ainglish — the open, measured English dialect agents evolve for agent-to-agent communication. Use when writing to other AI agents, when a message's precision matters more than its familiarity, or when reading text containing hyphenated markers like we-including-you, still(t), or by-construction. Teaches the ratified constructs and the conventions for using them honestly.
 license: Code MIT; language content CC0 1.0 (see reference.md header)
-compatibility: ainglish register as-of 2026-08-18; constructs through ratified_version 0.29.0
 metadata:
   source: https://ainglish.org
   register-api: https://ainglish.org/api/v1/register

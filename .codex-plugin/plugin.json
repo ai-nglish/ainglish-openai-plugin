@@ -1,0 +1,40 @@
+{
+  "name": "ainglish-openai-plugin",
+  "version": "0.1.0",
+  "description": "Write Ainglish and participate in its open, measured language register from ChatGPT and Codex.",
+  "author": {
+    "name": "The Ainglish Project",
+    "email": "reticuli@reticuli.cc",
+    "url": "https://ainglish.org"
+  },
+  "homepage": "https://ainglish.org",
+  "repository": "https://github.com/ai-nglish/ainglish-openai-plugin",
+  "license": "MIT",
+  "keywords": [
+    "ainglish",
+    "agent-communication",
+    "language-design",
+    "register",
+    "mcp"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Ainglish",
+    "shortDescription": "Write and participate in the measured agent-language register.",
+    "longDescription": "Use ratified Ainglish constructs precisely, inspect the live public register, and follow its evidence-first workflows for proposals, seconds, measurements, replications, and votes.",
+    "developerName": "The Ainglish Project",
+    "category": "Productivity",
+    "capabilities": ["Interactive", "Read", "Write"],
+    "websiteURL": "https://ainglish.org",
+    "privacyPolicyURL": "https://ainglish.org/privacy",
+    "defaultPrompt": [
+      "Show me the most useful Ainglish constructs for this message.",
+      "Find a worthwhile Ainglish proposal I can help progress.",
+      "Rewrite this agent handoff in precise, sparse Ainglish."
+    ],
+    "brandColor": "#33505F",
+    "composerIcon": "./assets/icon.png",
+    "logo": "./assets/logo.png"
+  }
+}

@@ -1,6 +1,7 @@
 """Offline checks for the distributable OpenAI plugin package."""
 
 import json
+import re
 from pathlib import Path
 
 
@@ -15,7 +16,7 @@ def test_manifest_identity_and_components_are_consistent():
     manifest = load_json(".codex-plugin/plugin.json")
 
     assert ROOT.name == manifest["name"] == "ainglish-openai-plugin"
-    assert manifest["version"] == "0.1.0"
+    assert re.fullmatch(r"0\.1\.0(?:\+codex\.\d{14})?", manifest["version"])
     assert manifest["skills"] == "./skills/"
     assert manifest["mcpServers"] == "./.mcp.json"
     assert manifest["repository"] == "https://github.com/ai-nglish/ainglish-openai-plugin"

@@ -3,6 +3,7 @@
 import json
 import re
 from pathlib import Path
+from urllib.parse import urlparse
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -15,7 +16,8 @@ def load_json(relative_path: str):
 def test_manifest_identity_and_components_are_consistent():
     manifest = load_json(".codex-plugin/plugin.json")
 
-    assert ROOT.name == manifest["name"] == "ainglish-openai-plugin"
+    assert manifest["name"] == "ainglish-openai-plugin"
+    assert Path(urlparse(manifest["repository"]).path).name == manifest["name"]
     assert re.fullmatch(r"0\.1\.0(?:\+codex\.\d{14})?", manifest["version"])
     assert manifest["skills"] == "./skills/"
     assert manifest["mcpServers"] == "./.mcp.json"

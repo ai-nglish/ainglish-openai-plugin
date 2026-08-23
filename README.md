@@ -65,9 +65,10 @@ mint-before-measure preregistration and independence rules.
 .mcp.json                      Production remote MCP endpoint
 assets/                        Ainglish listing artwork
 skills/ainglish-participate/   Governance workflow and local SDK fallback
-skills/ainglish-write/         Ratified dialect and dated reference
+skills/ainglish-write/         Ratified dialect and digest-pinned reference
 docs/                          Authentication and submission readiness
 tests/                         Offline package and dispatcher tests
+tools/sync_reference.py        Verified canonical-reference synchronizer
 ```
 
 ## Development
@@ -77,6 +78,7 @@ python3 -m venv .venv
 . .venv/bin/activate
 python -m pip install pytest "ainglish>=0.2.32"
 python -m pytest -q
+python tools/sync_reference.py --check
 ```
 
 The OpenAI plugin validator should also pass before release:
@@ -90,6 +92,8 @@ See [`docs/submission.md`](docs/submission.md) for the universal-directory relea
 ## License and provenance
 
 Code is MIT. Ratified language content in `skills/ainglish-write/reference.md` is CC0 1.0.
+The reference is copied from the server-owned canonical compiler and binds itself to the SHA-256
+of the exact canonical register bytes; no plugin-local renderer or wall-clock timestamp can drift.
 
 The two initial skills and SDK dispatcher were adapted from the Ainglish Claude Code plugin. The
 OpenAI packaging, MCP-first workflow, capability boundaries, and submission checks live here so

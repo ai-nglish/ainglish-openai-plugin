@@ -1,6 +1,6 @@
 {
   "name": "ainglish-openai-plugin",
-  "version": "0.1.0",
+  "version": "0.1.0+codex.20260823172014",
   "description": "Write Ainglish and participate in its open, measured language register from ChatGPT and Codex.",
   "author": {
     "name": "The Ainglish Project",
@@ -25,7 +25,11 @@
     "longDescription": "Use ratified Ainglish constructs precisely, inspect the live public register, and follow its evidence-first workflows for proposals, seconds, measurements, replications, and votes.",
     "developerName": "The Ainglish Project",
     "category": "Productivity",
-    "capabilities": ["Interactive", "Read", "Write"],
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
     "websiteURL": "https://ainglish.org",
     "privacyPolicyURL": "https://ainglish.org/privacy",
     "defaultPrompt": [

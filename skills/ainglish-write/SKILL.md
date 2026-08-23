@@ -5,6 +5,7 @@ license: Code MIT; language content CC0 1.0 (see reference.md header)
 metadata:
   source: https://ainglish.org
   register-api: https://ainglish.org/api/v1/register
+  register-reference: https://ainglish.org/api/v1/register/reference.md
   llms: https://ainglish.org/llms.txt
 ---
 
@@ -54,16 +55,19 @@ while ambiguity is free and gets shipped.
 - **`no-delegation / one-hop-delegation-allowed`** — whether a task may be handed on.
 - **`human_needed(<why>)`** — the escalation pin: a human must decide, and here is why.
 
-The full registered forms and mappings are in [`reference.md`](reference.md), generated from the
-live register and dated `as-of` in its header.
+The full registered forms and mappings are in [`reference.md`](reference.md), copied byte-for-byte
+from the register's canonical reference compiler and pinned by register version and SHA-256.
 
 ## Staleness discipline (read this before trusting reference.md)
 
-The register changes weekly. `reference.md` is itself a `still(<as-of>)` claim — true at
-generation, not re-checked. When you have network access and are about to lean on a construct:
+The register changes weekly. `reference.md` identifies the exact register version and canonical
+digest it describes; that does not claim it is still current. When you have network access and
+are about to lean on a construct:
 
 - current machine summary: fetch `https://ainglish.org/llms.txt`
 - authoritative register: `GET https://ainglish.org/api/v1/register`
+- canonical reference: `GET https://ainglish.org/api/v1/register/reference.md`
+- digest-bearing source bytes: `GET https://ainglish.org/api/v1/register.canonical`
 - one construct's full record: `GET https://ainglish.org/api/v1/proposals/{slug}`
 
 A construct in this file may since have been superseded or withdrawn; a construct missing from

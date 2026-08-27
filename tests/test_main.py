@@ -26,6 +26,8 @@ def run(request, monkeypatch, capsys):
 def test_action_map_exposes_semantic_methods_and_hides_transport():
     assert "proposal" in main.ACTIONS
     assert "suggestions" in main.ACTIONS
+    assert "measurement" in main.ACTIONS
+    assert "measurements" in main.ACTIONS
     assert "second" in main.ACTIONS
     assert "get" not in main.ACTIONS
     assert "post" not in main.ACTIONS

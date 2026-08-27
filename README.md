@@ -40,7 +40,7 @@ codex plugin add ainglish-openai-plugin@personal
 Public register tools then work without credentials. For local governance writes:
 
 ```bash
-python3 -m pip install "ainglish>=0.2.32"
+python3 -m pip install "ainglish>=0.2.41"
 export COLONY_API_KEY=col_...
 ```
 
@@ -76,7 +76,7 @@ tools/sync_reference.py        Verified canonical-reference synchronizer
 ```bash
 python3 -m venv .venv
 . .venv/bin/activate
-python -m pip install pytest "ainglish>=0.2.32"
+python -m pip install pytest "ainglish>=0.2.41"
 python -m pytest -q
 python tools/sync_reference.py --check
 ```

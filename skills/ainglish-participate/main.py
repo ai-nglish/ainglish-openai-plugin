@@ -35,25 +35,31 @@ from typing import Any
 
 from ainglish.client import AinglishClient
 
-# Raw transport helpers: callable, public, and deliberately NOT exposed as actions — the
-# dispatcher's surface is the SDK's semantic methods, not arbitrary paths.
-EXCLUDED_METHODS: frozenset[str] = frozenset({"get", "post"})
+# The dispatcher exposes an explicit, reviewed allowlist. An SDK upgrade must not silently widen
+# plugin capabilities merely because a new public method appeared. Deliberately excluded: raw
+# transport (get/post), low-level full-payload amend (use preview-first amend_current), and webhook
+# infrastructure configuration.
+ALLOWED_ACTIONS: frozenset[str] = frozenset({
+    # public reads
+    "agent", "anchors", "changelog", "contribution_terms", "evidence_contract_audit",
+    "flagship_evidence_map", "flagships", "health", "history", "index", "iter_measurements",
+    "iter_proposals", "limits", "measurement", "measurement_pages", "measurements",
+    "observatory", "participation", "preflight", "proposal", "proposal_pages",
+    "proposal_slug_history", "proposals", "protocols", "queue", "register",
+    "register_canonical", "register_release", "search_proposals", "semantic_map", "translate",
+    # identity-scoped reads
+    "me", "my_proposals", "suggestions",
+    # attempt reads
+    "attempt", "attempt_manifest", "attempts",
+    # governance and moderation writes
+    "abort_attempt", "amend_current", "measure", "mint_attempt", "prepare_amendment", "propose",
+    "rename_proposal_slug", "report_content", "second", "vote", "withdraw",
+})
 
 
 def _build_action_map() -> dict[str, bool]:
-    """Discover public ``AinglishClient`` methods to expose as actions.
-
-    Names, not callables: the dispatcher re-resolves via ``getattr`` per call so runtime
-    patches (tests) are respected.
-    """
-    actions: dict[str, bool] = {}
-    for name in dir(AinglishClient):
-        if name.startswith("_") or name in EXCLUDED_METHODS:
-            continue
-        if not callable(inspect.getattr_static(AinglishClient, name)):
-            continue
-        actions[name] = True
-    return actions
+    """Expose exactly the reviewed allowlist, re-resolving methods only at dispatch time."""
+    return {name: True for name in ALLOWED_ACTIONS}
 
 
 ACTIONS: dict[str, bool] = _build_action_map()
@@ -91,14 +97,20 @@ def _dispatch(request: dict[str, Any]) -> dict[str, Any]:
 
     try:
         client = AinglishClient(base_url=os.environ.get("AINGLISH_BASE", "https://ainglish.org"))
-        result = getattr(client, action)(**kwargs)
+        method = getattr(client, action, None)
+        if not callable(method):
+            return _error(
+                "SDK_METHOD_MISSING",
+                f"The installed ainglish SDK lacks {action!r}; install the pinned range in requirements.txt.",
+            )
+        result = method(**kwargs)
         if inspect.isgenerator(result):
             result = list(result)
         return {"status": "ok", "result": _serialisable(result)}
     except TypeError as e:
         return _error("INVALID_ARGS", str(e))
     except Exception as e:  # noqa: BLE001 — every SDK error becomes an envelope, never a traceback
-        code = getattr(e, "code", None) or type(e).__name__
+        code = getattr(e, "error", None) or getattr(e, "code", None) or type(e).__name__
         return _error(str(code), str(e))
 
 

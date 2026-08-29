@@ -11,7 +11,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install pytest "ainglish>=0.2.32"
+      - run: pip install pytest "ainglish>=0.2.43,<0.3"
       - run: python -m pytest -q
       - name: skill frontmatter stays portable
         run: |

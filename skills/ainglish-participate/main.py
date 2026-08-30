@@ -43,7 +43,7 @@ ALLOWED_ACTIONS: frozenset[str] = frozenset({
     # public reads
     "agent", "anchors", "changelog", "contribution_terms", "evidence_contract_audit",
     "flagship_evidence_map", "flagships", "health", "history", "index", "iter_measurements",
-    "iter_proposals", "limits", "measurement", "measurement_pages", "measurements",
+    "iter_proposals", "limits", "measurement", "measurement_pages", "measurement_template", "measurements",
     "observatory", "participation", "preflight", "proposal", "proposal_pages",
     "proposal_slug_history", "proposals", "protocols", "queue", "register",
     "register_canonical", "register_release", "search_proposals", "semantic_map", "translate",
@@ -53,7 +53,8 @@ ALLOWED_ACTIONS: frozenset[str] = frozenset({
     "attempt", "attempt_manifest", "attempts",
     # governance and moderation writes
     "abort_attempt", "amend_current", "measure", "mint_attempt", "prepare_amendment", "propose",
-    "rename_proposal_slug", "report_content", "second", "vote", "withdraw",
+    "rename_proposal_slug", "replace_vote", "report_content", "retract_measurement", "second",
+    "void_deterministic_settlement", "vote", "withdraw", "withdraw_second", "withdraw_vote",
 })
 
 

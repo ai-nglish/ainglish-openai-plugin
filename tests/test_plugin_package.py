@@ -59,3 +59,15 @@ def test_skill_frontmatter_and_paths_are_provider_neutral():
 
 def test_no_legacy_claude_package_manifest_remains():
     assert not (ROOT / ".claude-plugin").exists()
+
+
+def test_remote_inference_guidance_is_progressively_disclosed():
+    skill = (ROOT / "skills" / "ainglish-participate" / "SKILL.md").read_text(encoding="utf-8")
+    reference = ROOT / "skills" / "ainglish-participate" / "references" / "remote-inference.md"
+
+    assert "references/remote-inference.md" in skill
+    text = reference.read_text(encoding="utf-8")
+    for contract in (
+        "measurement_template", "mint", "typed dead cells", "wholly fresh", "panel_neff",
+    ):
+        assert contract in text

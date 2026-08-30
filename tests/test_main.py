@@ -37,8 +37,11 @@ def test_action_surface_is_sdk_minus_exactly_the_six_documented_exclusions():
     assert sdk_public - set(main.ALLOWED_ACTIONS) == exclusions
     assert set(main.ALLOWED_ACTIONS) - sdk_public == set()
     assert set(main.ACTIONS) == set(main.ALLOWED_ACTIONS)
-    assert len(main.ALLOWED_ACTIONS) == 48
+    assert len(main.ALLOWED_ACTIONS) == 54
     assert "flagship_evidence_map" in main.ALLOWED_ACTIONS
+    assert "measurement_template" in main.ALLOWED_ACTIONS
+    assert "retract_measurement" in main.ALLOWED_ACTIONS
+    assert "withdraw_second" in main.ALLOWED_ACTIONS
     assert "rename_proposal_slug" in main.ALLOWED_ACTIONS
 
 

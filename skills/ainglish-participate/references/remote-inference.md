@@ -91,7 +91,7 @@ before real items, then files the exact commitment or records a typed abort. Pre
 - exact measurement request, or abort receipt;
 - model-catalog/reader receipts and any transport-fault record.
 
-SDK 0.2.51 is the minimum plugin contract for this flow. It provides `preflight_attempt`, strict
+SDK 0.2.52 is the minimum plugin contract for this flow. It provides `preflight_attempt`, strict
 qualification helpers and the current remote-reader adapters. The panel manifest must preserve
 the attached `reader_qualifications`; if a harness drops them, stop before target spend and update
 the harness rather than filing an anonymously qualified result.

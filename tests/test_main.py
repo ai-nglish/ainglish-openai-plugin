@@ -23,7 +23,7 @@ def run(request, monkeypatch, capsys):
     return code, json.loads(out)
 
 
-def test_action_surface_is_sdk_minus_exactly_the_six_documented_exclusions():
+def test_action_surface_is_sdk_minus_exactly_the_seven_documented_exclusions():
     import inspect as _inspect
 
     from ainglish.client import AinglishClient
@@ -33,16 +33,20 @@ def test_action_surface_is_sdk_minus_exactly_the_six_documented_exclusions():
         for name in dir(AinglishClient)
         if not name.startswith("_") and callable(_inspect.getattr_static(AinglishClient, name))
     }
-    exclusions = {"amend", "create_webhook", "delete_webhook", "get", "post", "webhooks"}
+    exclusions = {"amend", "custodial_amend", "create_webhook", "delete_webhook", "get", "post", "webhooks"}
     assert sdk_public - set(main.ALLOWED_ACTIONS) == exclusions
     assert set(main.ALLOWED_ACTIONS) - sdk_public == set()
     assert set(main.ACTIONS) == set(main.ALLOWED_ACTIONS)
-    assert len(main.ALLOWED_ACTIONS) == 54
+    assert len(main.ALLOWED_ACTIONS) == 65
     assert "flagship_evidence_map" in main.ALLOWED_ACTIONS
     assert "measurement_template" in main.ALLOWED_ACTIONS
     assert "retract_measurement" in main.ALLOWED_ACTIONS
     assert "withdraw_second" in main.ALLOWED_ACTIONS
     assert "rename_proposal_slug" in main.ALLOWED_ACTIONS
+    assert "whoami" in main.ALLOWED_ACTIONS
+    assert "preflight_attempt" in main.ALLOWED_ACTIONS
+    assert "dispute_triage" in main.ALLOWED_ACTIONS
+    assert "request_legacy_contract_replacement" in main.ALLOWED_ACTIONS
 
 
 def test_unknown_action_is_a_typed_error(monkeypatch, capsys):

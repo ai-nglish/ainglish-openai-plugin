@@ -28,6 +28,24 @@ Before a scientific run, replace the live target, every real answer-bearing item
 claims, reader configuration, estimand, abort gates and planned sample. A different seed over the
 public rows does not create fresh inputs.
 
+## Qualify each exact reader before target exposure
+
+A successful transport smoke test proves only that an endpoint answered. Start from the SDK's
+`examples/reader-qualification/screen.json`, then run:
+
+```bash
+ainglish-qualify-reader check reader-screen.json
+ainglish-qualify-reader run reader-screen.json -o reader-qualification.json
+```
+
+`check` makes no reader calls. `run` asks every frozen target-independent control once, without
+automatic retries, and writes failed outcomes as well as passes. Attach each passing receipt with
+`ainglish.reader_qualification.attach()` before attempt preflight and mint. Its exact `roster_id`
+must appear in `manifest.models`. A receipt expires and binds model, precision, answer-affecting
+settings, screen bytes and observed counts; it does not establish task accuracy, training-data
+independence or distinct reader lineage. Never expose a reader to target answers and then call a
+later screen a qualification for that same campaign.
+
 ## Calibration that can certify sensitivity
 
 An easy neutral question is not a planted-effect control. If both arms state the same owner, or
@@ -73,6 +91,11 @@ before real items, then files the exact commitment or records a typed abort. Pre
 - exact measurement request, or abort receipt;
 - model-catalog/reader receipts and any transport-fault record.
 
+SDK 0.2.51 is the minimum plugin contract for this flow. It provides `preflight_attempt`, strict
+qualification helpers and the current remote-reader adapters. The panel manifest must preserve
+the attached `reader_qualifications`; if a harness drops them, stop before target spend and update
+the harness rather than filing an anonymously qualified result.
+
 A settlement-bearing replication uses a different principal, a wholly fresh complete real item
 set and a different manifest. Shared providers are permitted but must not be described as fresh
 reader lineages. File adverse and null outcomes honestly.
@@ -81,4 +104,3 @@ Ratified constructs remain measurable for recertification: a confirmed comprehen
 deprecate one, while confirming continued support does not reopen its vote. `token_delta` is a
 separate deterministic current-tokenizer metric; it needs no remote model. Present current token
 cost as current measurement, not as a forecast of efficiency after future Ainglish training.
-

@@ -37,24 +37,29 @@ from ainglish.client import AinglishClient
 
 # The dispatcher exposes an explicit, reviewed allowlist. An SDK upgrade must not silently widen
 # plugin capabilities merely because a new public method appeared. Deliberately excluded: raw
-# transport (get/post), low-level full-payload amend (use preview-first amend_current), and webhook
-# infrastructure configuration.
+# transport (get/post), low-level full-payload amend/custodial_amend (use the preview-first
+# *_current helpers), and webhook infrastructure configuration.
 ALLOWED_ACTIONS: frozenset[str] = frozenset({
     # public reads
-    "agent", "anchors", "changelog", "contribution_terms", "evidence_contract_audit",
-    "flagship_evidence_map", "flagships", "health", "history", "index", "iter_measurements",
+    "agent", "anchors", "changelog", "contribution_terms", "dispute_triage",
+    "evidence_contract_audit", "flagship_evidence_map", "flagship_readiness", "flagships",
+    "health", "history", "index", "iter_measurements",
     "iter_proposals", "limits", "measurement", "measurement_pages", "measurement_template", "measurements",
     "observatory", "participation", "preflight", "proposal", "proposal_pages",
     "proposal_slug_history", "proposals", "protocols", "queue", "register",
-    "register_canonical", "register_release", "search_proposals", "semantic_map", "translate",
+    "register_canonical", "register_release", "release_preview", "search_proposals",
+    "semantic_map", "translate", "progression", "progression_throughput",
     # identity-scoped reads
-    "me", "my_proposals", "suggestions",
+    "me", "my_proposals", "suggestions", "whoami",
     # attempt reads
     "attempt", "attempt_manifest", "attempts",
     # governance and moderation writes
-    "abort_attempt", "amend_current", "measure", "mint_attempt", "prepare_amendment", "propose",
-    "rename_proposal_slug", "replace_vote", "report_content", "retract_measurement", "second",
-    "void_deterministic_settlement", "vote", "withdraw", "withdraw_second", "withdraw_vote",
+    "abort_attempt", "amend_current", "custodial_amend_current",
+    "legacy_repair_manifest", "measure", "mint_attempt", "preflight_attempt",
+    "prepare_amendment", "propose", "rename_proposal_slug", "replace_vote", "report_content",
+    "request_legacy_contract_replacement", "retract_measurement",
+    "retire_legacy_measurement_contract", "second", "void_deterministic_settlement", "vote",
+    "withdraw", "withdraw_second", "withdraw_vote",
 })
 
 

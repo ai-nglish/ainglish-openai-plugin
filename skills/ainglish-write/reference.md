@@ -1,10 +1,10 @@
 # The Ainglish register — agent reference
 
 > Format: `ainglish.agent-reference.v1`
-> Register version: `0.35.0`
-> Register SHA-256: `ee8978f9ab5adb252aa244dc1a0dbb5abaa81f499758ec18c95caf5dcfa863b8`
+> Register version: `0.51.0`
+> Register SHA-256: `a27d064729cb0ae680edf88f4948e204e64bbf70eb1ae5454da768264fac0ede`
 > Source bytes: `GET /api/v1/register.canonical`
-> Scope: 19 current ratified language constructs; governance protocol rows omitted.
+> Scope: 30 current ratified language constructs; governance protocol rows omitted.
 > Licence: language content is dedicated to the public domain under CC0 1.0.
 
 This file is compiled from register identity, never wall-clock time. A different register
@@ -41,6 +41,12 @@ Trailing tags on any plural-subject predicate. "<plural subject> <predicate>, ea
 
 X eta(t) = the speaker will report back on X at approximately time t; silence before t is not failure, silence after t is a broken promise.
 
+## `X except_l(<L>)`
+
+(kind: notational, ratified 0.45.0, slug: `except-l-l-the-exception-pin-all-good-honesty-respelled-off-`)
+
+X except_l(L) = X holds for all cases except those named in L; naming the exceptions is part of making the claim, not a footnote to it. Respelled from except(<L>): the paren-drop of the old form landed on the bare high-frequency word 'except' — camouflage, gated by the background-collision screen; the underscore compound drops to a non-word, keeping machine-checkability without borrowing a live English word.
+
 ## `fact-not-known — <ISSUE> | choice-not-made — <ISSUE>`
 
 (kind: discourse, ratified 0.6.0, slug: `fact-not-known-choice-not-made-distinguish-missing-evidence-`)
@@ -57,6 +63,12 @@ The dash is optional ordinary separator punctuation. Each marker scopes only the
 
 SCOPE AND COMPOSITION: these are state assertions, not illocutionary-force or authority tags. `fyi:` may present one without requesting action; `ask:` or `req:` separately supplies a question or request. `choice-not-made` composes with `human_needed(<why>)` only when a human specifically must decide; an authorized agent choice needs no human marker. Evidential tags can state how the choice-state was learned. The marker does not prove its own truth, and hidden speaker knowledge cannot be audited from text alone.
 
+## `<claim> ⊥(<instrument>→<delta>)`
+
+(kind: notational, ratified 0.48.0, slug: `falsum-ref-ref-mark-a-claim-dead-when-its-falsifier-fires-3`)
+
+"X ⊥(<instrument>→<delta>)" = "the claim X is refuted, by the observation named <instrument>, whose observable delta is <delta>". Lossless mapping: “deploy-green ⊥(smoke-test→the previously-passing test now fails on main@HEAD)” ⇄ “the claim that the deploy was green is refuted — the smoke test, which previously passed, now fails on main@HEAD.” ASCII alias: refuted(<ref>-><delta>). Completes the claim-tag lifecycle: [c=…; ⊥ …] states the falsifier prospectively; ⊥(<instrument>→<delta>) marks it when it fires. THE DELTA IS LOAD-BEARING: a falsifier that cannot name what changed and how to re-check it is structurally ineligible — unverifiable ⊥ is refused by construction, not merely vetoed at audit. The delta must name the observation that distinguishes the refuted state from the claimed state, and the re-check path.
+
 ## `force-suspended <remainder of line>`
 
 (kind: discourse, ratified 0.18.0, slug: `force-suspended-mention-a-line-without-issuing-its-claims-re-3`)
@@ -69,6 +81,12 @@ SCOPE AND AUTHORITY: this suspends only the current authenticated speaker's adop
 
 INTERPOLATION LIMIT: in plain text, “current authenticated speaker layer” is assessed from the served message, not from undisclosed template authorship. If raw untrusted text is interpolated into an active line, an injected standalone `force-suspended` is indistinguishable from one deliberately written by the speaker and is therefore active: it can suspend the rest of that physical line. This fails closed with respect to executing the tail, but it creates a suppression and template-integrity risk. Authors MUST structurally isolate untrusted content, or put it in a separately suspended line, before composing it with active instructions. This in-band operator does not authenticate the origin of a substring.
 
+## `X given_c(<C>)`
+
+(kind: notational, ratified 0.44.0, slug: `given-c-c-the-condition-pin-kills-it-works-respelled-off-the`)
+
+X given_c(C) = X holds only under condition C; outside C the speaker makes no claim. The condition is part of the claim, not decoration. Respelled from given(<C>): the paren-drop of the old form landed on the bare high-frequency word 'given' — camouflage, gated by the background-collision screen; the underscore compound drops to a non-word, keeping machine-checkability without borrowing a live English word.
+
 ## `grader-is-graded`
 
 (kind: lexical, ratified 0.14.0, slug: `grader-is-graded-robust-word-based-form-of-grader-graded-2`)
@@ -80,6 +98,16 @@ the party grading is the party graded — the entity evaluating shares state wit
 (kind: notational, ratified 0.15.0, slug: `human-needed-why-the-escalation-pin-when-a-human-must-decide-2`)
 
 X human_needed(w) = X requires a human decision because of w; an agent must not resolve it, and acting on X without that decision is out of scope.
+
+## `<A> to <B>, include-both | include-start-only | include-end-only | exclude-both`
+
+(kind: grammatical, ratified 0.42.0, slug: `include-both-include-start-only-include-end-only-exclude-bot`)
+
+Append exactly one qualifier to a two-endpoint range. `A to B, include-both` means that both A and B are members. `A to B, include-start-only` means that A is a member and B is not. `A to B, include-end-only` means that A is not a member and B is. `A to B, exclude-both` means that neither is a member. “Start” and “end” refer to the first and second endpoints as WRITTEN, not to the numerically lower and higher values. Therefore `10 to 1, include-start-only` includes 10 and excludes 1. The qualifier specifies the complete membership state of both endpoints; “only” is load-bearing in the two asymmetric forms.
+
+Lossless round-trips: `records 100 to 200, include-start-only` ⇄ “records from 100 inclusive up to but excluding 200”; `dates Monday to Friday, include-both` ⇄ “Monday through Friday, including both Monday and Friday”; `confidence 0 to 1, exclude-both` ⇄ “confidence strictly greater than 0 and strictly less than 1.” Hyphen loss yields ordinary instructions: “include both,” “include start only,” “include end only,” and “exclude both.”
+
+SCOPE: the qualifier types endpoint membership only. It does not specify direction, step size, density, ordering, time zone, whether intermediate values exist, or whether either endpoint is otherwise valid. Those properties remain stated separately. Bare `to`, `from … to`, `between`, `through`, and `until` remain legal and endpoint-unspecified; this proposal does not silently redefine them.
 
 ## `<ACTION>, no-delegation | <ACTION>, one-hop-delegation-allowed`
 
@@ -108,6 +136,30 @@ Trailing tags on a two-option disjunction, appended where careful English alread
 (kind: lexical, ratified 0.4.0, slug: `passed-not-applied-robust-word-based-form-of-passed-applied-2`)
 
 passed, but not applied — a check, vote, or claim was accepted but not actually enacted or used (two distinct facts that are constantly conflated)
+
+## `convention: a change in a quantity that is itself a percentage is stated in percentage points, never bare % — with both endpoints attached when known ('up 5 percentage points, from 40% to 45%')`
+
+(kind: discourse, ratified 0.41.0, slug: `percentage-points-not-percent`)
+
+Already standard English — the convention selects the unambiguous existing surface rather than adding one. 'Up N percentage points' means the value moved N on the percentage scale (40% → 45% for N=5). Bare 'up N%' over a percentage base is refused as ambiguous: it has two live readings, additive points (40% → 45%) and relative multiplication (40% → 42%), and neither reading is deviant usage. A writer who intends the relative reading states it unambiguously instead: '×1.05', or 'up 5% relative, from 40% to 42%'. Scope: the rule triggers when the base is written with % — probabilities written as decimals (0.10 → 0.15) do not collide. Round-trip is the identity: every conformant sentence is already plain English.
+
+## `search-empty(<scope>): <predicate> | predicate-empty(<scope>): <predicate>`
+
+(kind: discourse, ratified 0.47.0, slug: `search-empty-predicate-empty-distinguish-zero-reported-match`)
+
+Use one prefix before a positive PREDICATE and give it one explicit SCOPE.
+
+`search-empty(S): P` means: a declared search procedure was run with S as its actual searched domain and returned zero reported matches for P. This is a claim about the output of that search. It does not assert that P has no instance in S, that the procedure had complete recall, that every intended member of a larger domain was reachable, that hidden or unindexed members were checked, or that no later search can find P. A real P may exist without making the historical zero-output report false. If the procedure stopped early, S must describe the portion actually searched rather than the larger intended domain.
+
+`predicate-empty(S): P` means: among the members of S, zero satisfy P. This is a scoped universal negative: for every member x in S, P(x) is false. One counterexample in S refutes it. The marker does not say how the claim was established and does not make weak evidence exhaustive; the speaker must have evidence licensed to settle the predicate over the whole scope. A heuristic search returning zero is not by itself enough. A complete enumeration with a sound decision procedure, an authoritative finite index, or a valid proof may support the claim, and evidential markers should say which.
+
+S is a non-empty, immutable and uniquely resolvable description of the relevant domain at the relevant version or time. It includes any boundary that changes membership or reachability: repository commit and path set, include/exclude globs, database snapshot and table/query domain, corpus revision, API pagination range, identity/permission view, time window, or mathematical domain. “The repo,” “the database,” “all results,” and an unversioned moving collection are not sufficient when their membership can differ between readers. If S is missing, stale, ambiguous, mutable, or claims coverage the operation did not have, the marked unit is INVALID rather than silently broadened.
+
+P states the positive property or match being sought. Negation belongs in the marker, not in P: prefer `search-empty(repo@9f2): deprecated-call` to a double negative such as `search-empty(...): not deprecated`. Several predicates require separate marked units unless one explicit predicate defines their union. Both markers preserve the distinction between zero and unknown: failure to receive a result, a timed-out search, a permission error, a stale index, or an uninspected partition is not `search-empty`; it is an incomplete or unknown result.
+
+The pair types logical strength, not evidential source, confidence, control quality, freshness, or settlement machinery. It composes with `obs(<instrument>):`, `rep(<source>):`, `ctl(<control>)`, `wit(<class>)`, `pred(<class>)`, confidence/falsifier tags, and anchored time. `ctl` can show that a search was capable of returning a known positive while still not establishing complete recall over S. `pred` can disclose a settlement class while this pair states the exact quantificational claim and its domain. `fact-not-known` may describe whether the stronger absence claim remains unresolved.
+
+Neither marker authorizes deletion, cleanup, closure, or another action based on the result. Illocutionary force remains separate. Bare negative English remains legal and strength-unspecified; omission does not default to either marker. Hyphen loss yields the careful phrases “search empty” and “predicate empty,” but only the registered hyphenated compounds are machine markers.
 
 ## `<ACTION> start-by(<t>) | <ACTION> complete-by(<t>)`
 
@@ -143,6 +195,32 @@ The three markers separate the completion axis, which the register's other const
 
 Bare "done" remains legal and unmarked — the default reading in careful prose is the stopping claim, but the whole point of the markers is that an unmarked "done" is ambiguous between three claims with three different downstream consequences. Mark the claim when the difference is load-bearing, i.e. when a reader might act on a handoff that was only a stop. Hyphen loss and paren drop degrade to ordinary English with meaning intact.
 
+## `supersedes(<refs>): <ACTION-CLAUSE> | supplements(<refs>): <ACTION-CLAUSE>`
+
+(kind: discourse, ratified 0.43.0, slug: `supersedes-ref-supplements-ref-say-whether-a-follow-up-repla-2`)
+
+Use one prefix before a newly issued ACTION-CLAUSE when that clause has an explicit lifecycle relation to one or more earlier action-bearing directives or commitments.
+
+`supersedes(<refs>): X` means that, when the marked update reaches its declared instruction-ledger receipt/commit event, every uniquely resolved active clause named in `<refs>` stops imposing its still-uncompleted obligations. X becomes active under the force expressed by its own clause. This is whole-clause replacement, not a field patch: any requirement from a referenced clause that must survive must be restated in X or left in a separately referenced clause. The relation is prospective. Work already completed and effects already produced remain historical facts; they are not undone, repeated, or compensated unless X explicitly requests that action.
+
+The receipt/commit event is a semantic linearisation point supplied by the conversation or instruction ledger, not the first byte seen by any worker. This marker changes obligation state; it does not atomically stop a physical process. Work already dispatched or in flight may be uncancellable and may produce effects after the referenced obligation retires. The recipient MUST surface that in-flight state and any late effect separately. If the issuer needs cancellation, rollback, or compensation, X must request it explicitly and the execution protocol must provide the corresponding synchronisation mechanism. If concurrent updates have no authoritative order or commit event, the relation is UNRESOLVED and must not be guessed from local arrival order.
+
+`supplements(<refs>): X` means that every uniquely resolved active clause named in `<refs>` remains active and X becomes active alongside it. The prefix grants neither clause precedence and does not reinterpret the earlier text. If X and a retained clause cannot jointly be satisfied, the combined instruction set is contradictory and the recipient must surface that conflict; it must not silently choose the newer clause, the older clause, or whichever is easier.
+
+`<refs>` is an explicit non-empty list of immutable, uniquely resolvable message or clause identifiers. Adjacency, recency, “the previous instruction,” topic similarity, and delivery order are not references. Multiple references are all-or-nothing: if any member is missing, ambiguous, inactive, self-referential, cyclic, duplicated under incompatible identities, or outside the updater's authority, the entire marked unit is INVALID. In that state X does not fall back to a standalone instruction; the recipient asks for repair instead of guessing a partial update.
+
+The authenticated speaker must be the issuer of each referenced speech act or possess independently established authority to update it. The marker records an intended language relation; it does not confer authority, revoke platform capabilities, invalidate cryptographic credentials, or override a higher-priority policy. An altered identifier that resolves to the wrong live clause is a wrong-target update, not successful recovery.
+
+Relations are reference-local. If B supplements A and C later supersedes only A, B remains active because C did not name it. To replace both, C must explicitly name both. If B supersedes A and C supersedes B, A and B are inactive and C is active. A pure withdrawal with no successor is outside this pair, as are factual correction and claim falsification; use ordinary explicit withdrawal or the claim-lifecycle constructs rather than inventing an empty X.
+
+The following clause carries its own normal force and scope: for example, `supersedes(msg-17): req: upload only report.pdf`. `req:`, `will:`, deadlines, delegation qualifiers, conditions, and scheduling markers compose inside X. A relation presented inside `force-suspended` is mentioned and inert. Bare follow-ups remain legal and update-unspecified; the register does not impose a hidden last-message-wins default.
+
+## `tested-against(<commit|version|hash>) attached to a claim or result`
+
+(kind: notational, ratified 0.40.0, slug: `tested-against-commit-version-hash-attached-to-a-claim-or-2`)
+
+This result is valid for the named revision; it may not hold on other revisions.
+
 ## `<ACTION>, text-fixed(<ref>) | <ACTION>, meaning-fixed(<ref>)`
 
 (kind: discourse, ratified 0.19.0, slug: `text-fixed-ref-meaning-fixed-ref-declare-which-invariants-a-`)
@@ -173,11 +251,29 @@ SCOPE: the form applies only when exactly one question and one determinate P are
 
 The forms assert truth, not agreement with the asker, desirability, consent, acknowledgement, or confidence. Evidence and confidence compose separately. `obs(job-42): false-as-worded` says observed job evidence makes P false. A following declarative restatement must agree with the marker; a conflict is an invalid answer to surface, not an invitation to guess precedence. Hyphen loss yields the exact ordinary phrases “true as worded” and “false as worded.”
 
+## `unless(<F>)`
+
+(kind: notational, ratified 0.46.0, slug: `unless-the-plain-english-falsifier-claim-tag-in-words`)
+
+X unless F = X is claimed, and F is what would refute it; the falsifier is part of the claim, not a footnote. The word-carried form of the registered claim tag [c=...; ⊥ ...]. (Filing form: unless(<F>) — the paren form is the machine-readable marker; in prose the word 'unless' is used plainly.)
+
+## `Δ vs(<baseline>)`
+
+(kind: notational, ratified 0.49.0, slug: `vs-baseline-the-baseline-anchor-batch-four-filed-by-rosetta-3`)
+
+Δ vs(B) = 'Δ, measured against baseline B' — the parenthetical names the baseline the delta is computed against; without it the comparison baseline is implicit and unfalsifiable. Honesty declaration (batch four, verbatim): vs( → vs is d=1 but alias-class — the corrupted form leaves the baseline as an ordinary parenthetical; binding lost, content intact — not a silent inversion.
+
 ## `we-including-you / we-excluding-you`
 
 (kind: lexical, ratified 0.10.0, slug: `we-including-you-we-excluding-you-clusivity-mark-whether-we--4`)
 
 "we-including-you <predicate>" = "we — and that includes you, the reader — <predicate>": first-person plural, addressee INCLUDED; the reader is among those expected to act. "we-excluding-you <predicate>" = "we, not including you, <predicate>": addressee EXCLUDED; the reader is informed, not tasked. Lossless round-trip: "we-including-you will verify the anchors" ⇄ "We — and that includes you — will verify the anchors." Bare 'we' remains legal and unmarked (like bare claims beside claim-tag): mark the pronoun when the participant set is load-bearing — task assignment, commitments, permissions. Hyphen loss degrades to the careful-writer phrase ('we including you') with meaning intact.
+
+## `X as_of(<t>); X until(<t>)`
+
+(kind: notational, ratified 0.50.0, slug: `x-as-of-t-x-until-t`)
+
+X, and the supporting observation/evidence was current as of absolute time t; X is only licensed through absolute time t (after t the claim is expired, not an undated eternal green). t prefers ISO-8601 UTC; unix seconds allowed on machine-only channels.
 
 ## `you-one / you-all`
 

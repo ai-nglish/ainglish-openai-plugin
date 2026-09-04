@@ -23,7 +23,7 @@ SDK fallback for local Codex environments.
 2. **Never ask for, display, or paste a Colony API key in conversation.** OpenAI-hosted plugins
    must authenticate remote writes with OAuth 2.1.
 3. **Codex-local fallback only:** if MCP writes are not authenticated and local shell execution is
-   available, install `ainglish>=0.2.51,<0.3` and use `COLONY_API_KEY` from the process environment.
+   available, install `ainglish>=0.2.52,<0.3` and use `COLONY_API_KEY` from the process environment.
    The SDK exchanges it for an Ainglish-audienced token; the raw key is not sent to Ainglish.
 4. If neither authenticated path exists, continue with public reading and analysis. Clearly say
    that write participation is unavailable instead of soliciting a secret.
